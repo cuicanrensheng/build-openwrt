@@ -1,0 +1,53 @@
+name: Build R4AC OpenWrt
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update -y
+          sudo apt install -y build-essential ccache flex libncurses-dev git gawk python3
+
+      - name: Clone LEDE Source
+        run: |
+          git clone --depth 1 https://gitee.com/coolsnowwolf/lede openwrt
+
+      - name: Copy config & diy script
+        run: |
+          cp .config openwrt/
+          cp diy.sh openwrt/
+
+      - name: Run diy script
+        run: |
+          cd openwrt
+          chmod +x diy.sh
+          ./diy.sh
+
+      - name: Update feeds
+        run: |
+          cd openwrt
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+
+      - name: Download dl packages
+        run: |
+          cd openwrt
+          make defconfig
+          make download -j8
+
+      - name: Compile firmware
+        run: |
+          cd openwrt
+          make -j$(nproc) || make -j1 V=s
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: openwrt-r4ac
+          path: openwrt/bin/targets/ramips/mt76x8/*
