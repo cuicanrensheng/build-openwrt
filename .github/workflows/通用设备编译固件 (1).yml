@@ -1,0 +1,45 @@
+name: Build OpenWrt for Xiaomi Mi Router 4A 100M
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Free up disk space (fix space errors)
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/share/boost
+          sudo apt-get clean
+          sudo apt-get autoremove -y
+          df -h
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libncurses5-dev gawk gettext git subversion libssl-dev libelf-dev unzip sharutils libncurses-term zlib1g-dev asciidoctor ocaml-nox
+
+      - name: Clone ImmortalWrt source code
+        run: |
+          git clone --depth=1 https://github.com/immortalwrt/immortalwrt.git -b openwrt-23.05
+          cd immortalwrt
+          cp ../config/.config .
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+
+      - name: Build firmware (limited cores to avoid crashes)
+        run: |
+          cd immortalwrt
+          make defconfig
+          make -j2 V=s
+
+      - name: Upload compiled firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: openwrt-firmware-xiaomi-4a-100m
+          path: |
+            immortalwrt/bin/targets/ramips/mt76x8/*xiaomi_mi-router-4a-100m*.bin
+            !immortalwrt/bin/targets/ramips/mt76x8/*kernel*.bin
+            !immortalwrt/bin/targets/ramips/mt76x8/*rootfs*.bin
