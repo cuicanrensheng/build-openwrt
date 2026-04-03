@@ -1,4 +1,4 @@
-name: 通用设备编译固件
+name: Build ImmortalWrt
 on:
   workflow_dispatch:
 
@@ -6,36 +6,33 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 检出代码
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 安装编译依赖
-        run: |运行: |
+      - name: Install dependencies
+        run: |
           sudo apt-get update
           sudo apt-get install -y build-essential libncurses5-dev gawk gettext git subversion libssl-dev libelf-dev
 
-      - name: 拉取 ImmortalWrt 源码
-        run: |运行: |运行: |运行: |
+      - name: Clone ImmortalWrt source
+        run: |
           git clone --depth=1 https://github.com/immortalwrt/immortalwrt.git -b openwrt-23.05
           cd immortalwrt
           cp ../config/.config .
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: 编译固件
-        run: |运行: |运行: |运行: |运行: |运行: |运行: |
+      - name: Build firmware
+        run: |
           cd immortalwrt
           make defconfig
           make -j$(nproc) V=s
 
-      - name: 上传固件
-        uses: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4
-        with:与:与:与与：与：与：与与：与：与：与与：与：与：与:
-          name: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware
-          path路径路径: |路径: |路径: |路径: |路径: |路径: |路径: |
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: immortalwrt-firmware
+          path: |
             immortalwrt/bin/targets/ramips/mt76x8/*.bin
             !immortalwrt/bin/targets/ramips/mt76x8/*kernel*.bin
             !immortalwrt/bin/targets/ramips/mt76x8/*rootfs*.bin
-
-
-
