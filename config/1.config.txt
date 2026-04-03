@@ -1,0 +1,113 @@
+# Automatically generated file; DO NOT EDIT.
+# OpenWrt Configuration
+CONFIG_MODULES=y
+CONFIG_HAVE_DOT_CONFIG=y
+CONFIG_HOST_OS_LINUX=y
+CONFIG_TARGET_ramips=y
+CONFIG_TARGET_ramips_mt76x8=y
+CONFIG_TARGET_ramips_mt76x8_DEVICE_xiaomi_mi-router-4a-100m=y
+CONFIG_HAS_SUBTARGETS=y
+CONFIG_HAS_DEVICES=y
+CONFIG_TARGET_BOARD="ramips"
+CONFIG_TARGET_SUBTARGET="mt76x8"
+CONFIG_TARGET_PROFILE="DEVICE_xiaomi_mi-router-4a-100m"
+CONFIG_TARGET_ARCH_PACKAGES="mipsel_24kc"
+CONFIG_DEFAULT_TARGET_OPTIMIZATION="-Os -pipe -mno-branch-likely -mips32r2 -mtune=24kc"
+CONFIG_CPU_TYPE="24kc"
+CONFIG_LINUX_5_15=y
+
+# Basic Mandatory Components (Brick-Proof Core)
+CONFIG_DEFAULT_base-files=y
+CONFIG_DEFAULT_busybox=y
+CONFIG_DEFAULT_ca-bundle=y
+CONFIG_DEFAULT_dnsmasq=y
+CONFIG_DEFAULT_dropbear=y
+CONFIG_DEFAULT_firewall4=y
+CONFIG_DEFAULT_fstools=y
+CONFIG_DEFAULT_iwinfo=y
+CONFIG_DEFAULT_kmod-gpio-button-hotplug=y
+CONFIG_DEFAULT_kmod-leds-gpio=y
+CONFIG_DEFAULT_kmod-mt7628=y  # 2.4G WiFi Driver
+CONFIG_DEFAULT_kmod-nft-offload=y
+CONFIG_DEFAULT_libc=y
+CONFIG_DEFAULT_libgcc=y
+CONFIG_DEFAULT_libustream-mbedtls=y
+CONFIG_DEFAULT_logd=y
+CONFIG_DEFAULT_mtd=y
+CONFIG_DEFAULT_netifd=y
+CONFIG_DEFAULT_nftables=y
+CONFIG_DEFAULT_odhcp6c=y
+CONFIG_DEFAULT_odhcpd-ipv6only=y
+CONFIG_DEFAULT_opkg=y
+CONFIG_DEFAULT_ppp=y
+CONFIG_DEFAULT_ppp-mod-pppoe=y
+CONFIG_DEFAULT_procd=y
+CONFIG_DEFAULT_procd-ujail=y
+CONFIG_DEFAULT_swconfig=y
+CONFIG_DEFAULT_uci=y
+CONFIG_DEFAULT_uclient-fetch=y
+CONFIG_DEFAULT_urandom-seed=y
+CONFIG_DEFAULT_urngd=y
+CONFIG_DEFAULT_wpad-basic-mbedtls=y
+
+# Core Drivers (Mandatory for Network/WiFi)
+CONFIG_PACKAGE_kmod-switch-rtl8367b=y  # Switch Driver (Critical for Port Recognition)
+CONFIG_PACKAGE_kmod-mt76-core=y
+CONFIG_PACKAGE_kmod-cfg80211=y
+CONFIG_PACKAGE_kmod-mac80211=y
+
+# LuCI Base & English Interface
+CONFIG_PACKAGE_luci=y
+CONFIG_PACKAGE_luci-light=y
+CONFIG_PACKAGE_luci-base=y
+CONFIG_PACKAGE_luci-mod-admin-full=y
+CONFIG_PACKAGE_luci-mod-network=y
+CONFIG_PACKAGE_luci-mod-status=y
+CONFIG_PACKAGE_luci-mod-system=y
+CONFIG_PACKAGE_luci-theme-bootstrap=y
+CONFIG_LUCI_LANG_en=y
+CONFIG_PACKAGE_luci-i18n-base-en=y
+CONFIG_PACKAGE_luci-i18n-firewall-en=y
+CONFIG_PACKAGE_luci-i18n-opkg-en=y
+
+# Core Function Plugins (Same as Working Firmware)
+CONFIG_PACKAGE_luci-app-ssr-plus=y
+CONFIG_PACKAGE_xray-core=y
+CONFIG_PACKAGE_shadowsocksr-libev=y
+CONFIG_PACKAGE_simple-obfs=y
+CONFIG_PACKAGE_microsocks=y
+CONFIG_PACKAGE_luci-app-turboacc=y  # Network Acceleration
+CONFIG_PACKAGE_luci-app-zerotier=y  # Network Virtualization
+CONFIG_PACKAGE_zerotier=y
+CONFIG_PACKAGE_luci-app-unblockmusic=y  # Unblock Music
+CONFIG_PACKAGE_luci-app-wol=y  # Wake on LAN
+CONFIG_PACKAGE_luci-app-vlmcsd=y  # KMS Activation
+CONFIG_PACKAGE_luci-app-upnp=y  # UPnP
+# Plugin English Language Packs
+CONFIG_PACKAGE_luci-i18n-ssr-plus-en=y
+CONFIG_PACKAGE_luci-i18n-zerotier-en=y
+CONFIG_PACKAGE_luci-i18n-turboacc-en=y
+CONFIG_PACKAGE_luci-i18n-unblockmusic-en=y
+CONFIG_PACKAGE_luci-i18n-wol-en=y
+CONFIG_PACKAGE_luci-i18n-vlmcsd-en=y
+CONFIG_PACKAGE_luci-i18n-upnp-en=y
+
+# IPTV Function Components (Added for Multicast/Passthrough)
+CONFIG_PACKAGE_luci-app-iptv=y  # IPTV GUI Configuration
+CONFIG_PACKAGE_luci-i18n-iptv-en=y  # IPTV English Language
+CONFIG_PACKAGE_igmpproxy=y  # IGMP Proxy (Critical for IPTV)
+CONFIG_PACKAGE_kmod-ipt-udp=y  # UDP Multicast Forwarding
+CONFIG_PACKAGE_kmod-ipt-ipset=y  # IP Multicast Filtering
+CONFIG_PACKAGE_kmod-bridge=y  # Bridging Support (Required for Passthrough)
+CONFIG_PACKAGE_kmod-ipt-nat=y  # NAT Forwarding (Needed for Some ISPs)
+
+# System Optimization (Avoid Overflow/Boot Failure)
+CONFIG_TARGET_ROOTFS_SQUASHFS=y
+CONFIG_TARGET_SQUASHFS_BLOCK_SIZE=256
+CONFIG_TARGET_ROOTFS_SIZE=128M  # Sufficient Root Partition Space
+CONFIG_PACKAGE_block-mount=y
+CONFIG_PACKAGE_fstools=y
+CONFIG_SIGNED_PACKAGES=y
+CONFIG_SHADOW_PASSWORDS=y
+CONFIG_USE_MUSL=y
+CONFIG_SSP_SUPPORT=y
