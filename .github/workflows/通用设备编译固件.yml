@@ -1,38 +1,41 @@
-name: 通用设备编译固件名称: 通用设备编译固件
-on:启用启用:
+name: 通用设备编译固件
+on:
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest运行于: ubuntu-latest运行于ubuntu-latest运行于: ubuntu-latest运行于: ubuntu-latest运行于ubuntu-latestubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行
-    steps:步骤步骤:步骤:
+    runs-on: ubuntu-latest
+    steps:
       - name: 检出代码
         uses: actions/checkout@v4
 
       - name: 安装编译依赖
-        run: |运行: |运行: |运行: |运行: |运行: |运行: |
+        run: |运行: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libncurses5-dev gawk gettext git subversion libssl-dev libelf-devsudo apt-get install -y build-essential libncurses5-dev gawk gettext git subversion libssl-dev libelf-dev 
+          sudo apt-get install -y build-essential libncurses5-dev gawk gettext git subversion libssl-dev libelf-dev
 
       - name: 拉取 ImmortalWrt 源码
-        run: |运行: |运行: |行: 行运行:|
+        run: |运行: |运行: |运行: |
           git clone --depth=1 https://github.com/immortalwrt/immortalwrt.git -b openwrt-23.05
           cd immortalwrt
           cp ../config/.config .
           ./scripts/feeds update -a
-          ./scripts/feeds install -a./scripts/feeds 安装 -a
+          ./scripts/feeds install -a
 
       - name: 编译固件
-        run: |运行: |行运行: |运行: |行
+        run: |运行: |运行: |运行: |运行: |运行: |运行: |
           cd immortalwrt
           make defconfig
           make -j$(nproc) V=s
 
       - name: 上传固件
-        uses使用用途用途用途用途用途用途用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4ctions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4ctions/upload-artifact@v4用途使用: aactions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: aactions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: aactions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: aactions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: aactions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: cactions/upload-artifact@v4actions/upload-artifact@v4用途使用: ctions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4ctions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: aactions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: aactions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: aactions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: aactions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: cactions/upload-artifact@v4用途: cactions/upload-artifact@v4用途: ctions/upload-artifact@v4ctions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: ctions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4ctions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: ctions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4ctions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: aactions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4actions/upload-artifact@v4用途使用: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: aactions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: cactions/upload-artifact@v4用途: ctions/upload-artifact@v4ctions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: actions/upload-artifact@v4actions/upload-artifact@v4用途用途: ctions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4actions/upload-artifact@v4用途
-        with:与与:与与：与：与:与：与：与：与：与:
-          name: immortalwrt-firmware名称: immortalwrt-firmwaremmortalwrt-firmware名称name: mmortalwrt-firmware名称: immortalwrt-firmwaremmortalwrt-firmware名称
-          path路径路径: |路径: |路径: |径|路径: |路径: |径||路径: |路径: |
+        uses: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4用途: actions/upload-artifact@v4
+        with:与:与:与与：与：与：与与：与：与：与与：与：与：与:
+          name: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware名称: immortalwrt-firmware
+          path路径路径: |路径: |路径: |路径: |路径: |路径: |路径: |
             immortalwrt/bin/targets/ramips/mt76x8/*.bin
             !immortalwrt/bin/targets/ramips/mt76x8/*kernel*.bin
             !immortalwrt/bin/targets/ramips/mt76x8/*rootfs*.bin
+
+
+
