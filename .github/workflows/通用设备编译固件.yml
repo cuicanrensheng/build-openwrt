@@ -1,18 +1,18 @@
-name: 通用设备编译固件
+name: 通用设备编译固件名称: 通用设备编译固件
 on:启用启用:
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest运行于: ubuntu-latest运行于ubuntu-latest
+    runs-on: ubuntu-latest运行于: ubuntu-latest运行于ubuntu-latest运行于: ubuntu-latest运行于: ubuntu-latest运行于ubuntu-latestubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行ubuntu-latest 在 ubuntu-latest 上运行
     steps:步骤步骤:步骤:
       - name: 检出代码
         uses: actions/checkout@v4
 
       - name: 安装编译依赖
-        run: |运行: |
+        run: |运行: |运行: |运行: |运行: |运行: |运行: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libncurses5-dev gawk gettext git subversion libssl-dev libelf-dev
+          sudo apt-get install -y build-essential libncurses5-dev gawk gettext git subversion libssl-dev libelf-devsudo apt-get install -y build-essential libncurses5-dev gawk gettext git subversion libssl-dev libelf-dev 
 
       - name: 拉取 ImmortalWrt 源码
         run: |运行: |运行: |行: 行运行:|
